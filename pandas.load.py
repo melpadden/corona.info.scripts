@@ -15,24 +15,24 @@ date_template = '{0:02d}-{1:02d}-{2}'
 url_template = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/{0}.csv'
 today = datetime.date.today()
 
-
 while the_day < today:
-    try:
-        date_string = date_template.format(the_day.month, the_day.day, the_day.year)
-        output_file_name = dir_path + '\\data\\' + date_string + '.csv'
-        data = pd.read_csv(output_file_name)
-        print(output_file_name + ' read')
-        data.head()
-        the_day = the_day + datetime.timedelta(days=1)
+    #try:
+    date_string = date_template.format(the_day.month, the_day.day, the_day.year)
+    output_file_name = dir_path + '\\data\\' + date_string + '.csv'
+    #output_file_name = dir_path + '\\data\\columns.csv'
+    data = pd.read_csv(output_file_name)
+    print(output_file_name + ' read')
+    print(data.head())
+    the_day = the_day + datetime.timedelta(days=1)
         # print ('{0} read'.format(output_file_name))
         # print(the_day)
         # print(the_day < today)
-    except FileNotFoundError:
-        print(output_file_name + ' not found')
-        exit()
-    except:
-        print('Error occurred')
-        exit()
+    #except FileNotFoundError:
+    #    print(output_file_name + ' not found')
+    #    exit()
+    #except:
+    #    print('Error occurred')
+    #    exit()
 
 print("Done!")
 

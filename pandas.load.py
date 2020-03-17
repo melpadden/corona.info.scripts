@@ -1,3 +1,4 @@
+import pandas as pd
 import datetime
 import os
 import urllib.request
@@ -13,19 +14,26 @@ the_day = datetime.date(2020, 1, 22)
 date_template = '{0:02d}-{1:02d}-{2}'
 url_template = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/{0}.csv'
 today = datetime.date.today()
-    
-while the_day < today:
-    date_string = date_template.format(the_day.month, the_day.day, the_day.year)
-    url = url_template.format(date_string)
-    output_file_name = dir_path + '\\data\\' + date_string + '.csv'
-    
-    with urllib.request.urlopen(url) as response, open(output_file_name, 'wb') as out_file:
-        shutil.copyfileobj(response, out_file)
 
-    print ('{0} created'.format(output_file_name))
-    the_day = the_day + datetime.timedelta(days = 1)
-    print(the_day)
-    print(the_day < today)
+
+while the_day < today:
+    try:
+        date_string = date_template.format(the_day.month, the_day.day, the_day.year)
+        output_file_name = dir_path + '\\data\\' + date_string + '.csv'
+        data = pd.read_csv(output_file_name)
+        print(output_file_name + ' read')
+        data.head()
+        the_day = the_day + datetime.timedelta(days=1)
+        # print ('{0} read'.format(output_file_name))
+        # print(the_day)
+        # print(the_day < today)
+    except FileNotFoundError:
+        print(output_file_name + ' not found')
+        exit()
+    except:
+        print('Error occurred')
+        exit()
 
 print("Done!")
+
 

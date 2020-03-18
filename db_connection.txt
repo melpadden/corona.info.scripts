@@ -1,0 +1,9 @@
+
+coronamaster
+
+pwd-coronadb-dev
+
+corona-info-1.cgeuq5sf7r5r.eu-west-1.rds.amazonaws.com
+
+
+178.192.66.145/32
